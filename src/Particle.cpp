@@ -1,13 +1,15 @@
 
 // src/Particle.cpp
+
+//Line 105 - End of the program provide by Professor
 #include "Particle.h"
 #include <cstdlib>
 #include <cmath>
 #include <SFML/Graphics.hpp>
 #include <iostream>
-
 using namespace Matrices;
 using namespace sf;
+using namespace std;
 
 Particle::Particle(RenderTarget& target, int numPoints, Vector2i mouseClickPosition)
 : m_A(2, numPoints), m_numPoints(numPoints)
@@ -104,36 +106,34 @@ void Particle::scale(double c) {
 bool Particle::almostEqual(double a, double b, double eps) {
     return fabs(a - b) < eps;
 }
-
 void Particle::unitTests() {
     int score = 0;
-    std::cout << "Testing RotationMatrix constructor...";
+    cout << "Testing RotationMatrix constructor...";
     double theta = M_PI / 4.0;
     RotationMatrix r(M_PI / 4);
     if (r.getRows() == 2 && r.getCols() == 2 && almostEqual(r(0, 0), cos(theta))
         && almostEqual(r(0, 1), -sin(theta))
         && almostEqual(r(1, 0), sin(theta))
         && almostEqual(r(1, 1), cos(theta))) {
-        std::cout << "Passed.\n\n+1" << std::endl;
+       cout << "Passed.\n\n+1" << std::endl;
         score++;
     } else {
-        std::cout << "Failed." << std::endl;
+        cout << "Failed." << endl;
     }
 
-    std::cout << "Testing ScalingMatrix constructor...";
+    cout << "Testing ScalingMatrix constructor...";
     ScalingMatrix s(1.5);
     if (s.getRows() == 2 && s.getCols() == 2
         && almostEqual(s(0, 0), 1.5)
         && almostEqual(s(0, 1), 0)
         && almostEqual(s(1, 0), 0)
         && almostEqual(s(1, 1), 1.5)) {
-        std::cout << "Passed.\n\n+1" << std::endl;
+        cout << "Passed.\n\n+1" << endl;
         score++;
     } else {
-        std::cout << "Failed." << std::endl;
+       cout << "Failed." << endl;
     }
-
-    std::cout << "Testing TranslationMatrix constructor...";
+    cout << "Testing TranslationMatrix constructor...";
     TranslationMatrix t(5, -5, 3);
     if (t.getRows() == 2 && t.getCols() == 3
         && almostEqual(t(0, 0), 5)
@@ -142,67 +142,67 @@ void Particle::unitTests() {
         && almostEqual(t(1, 1), -5)
         && almostEqual(t(0, 2), 5)
         && almostEqual(t(1, 2), -5)) {
-        std::cout << "Passed.\n\n+1" << std::endl;
+       cout << "Passed.\n\n+1" << ;
         score++;
     } else {
-        std::cout << "Failed." << std::endl;
+        cout << "Failed." << endl;
     }
 
-    std::cout << "Testing Particles..." << std::endl;
-    std::cout << "Testing Particle mapping to Cartesian origin..." << std::endl;
+    cout << "Testing Particles..." << endl;
+    cout << "Testing Particle mapping to Cartesian origin..." << std::endl;
     if (m_centerCoordinate.x != 0 || m_centerCoordinate.y != 0) {
-        std::cout << "Failed.\n\nExpected (0,0).\n\nReceived: (" << m_centerCoordinate.x
-                  << "," << m_centerCoordinate.y << ")" << std::endl;
+       cout << "Failed.\n\nExpected (0,0).\n\nReceived: (" << m_centerCoordinate.x
+                  << "," << m_centerCoordinate.y << ")" << endl;
     } else {
-        std::cout << "Passed.\n\n+1" << std::endl;
+       cout << "Passed.\n\n+1" << sendl;
         score++;
     }
 
-    std::cout << "Applying one rotation of 90 degrees about the origin..." << std::endl;
+    cout << "Applying one rotation of 90 degrees about the origin..." << std::endl;
     Matrix initialCoords = m_A;
     rotate(M_PI / 2.0);
     bool rotationPassed = true;
     for (int j = 0; j < initialCoords.getCols(); j++) {
         if (!almostEqual(m_A(0, j), -initialCoords(1, j)) || !almostEqual(m_A(1, j), initialCoords(0, j))) {
-            std::cout << "Failed mapping: ";
-            std::cout << "(" << initialCoords(0, j) << ", " << initialCoords(1, j) << ")"
+            cout << "Failed mapping: ";
+           cout << "(" << initialCoords(0, j) << ", " << initialCoords(1, j) << ")"
                       << " ==> (" << m_A(0, j) << ", " << m_A(1, j) << ")" << std::endl;
             rotationPassed = false;
         }
     }
-    if (rotationPassed) { std::cout << "Passed.\n\n+1" << std::endl; score++; }
-    else { std::cout << "Failed." << std::endl; }
+    if (rotationPassed) { cout << "Passed.\n\n+1" << endl; score++; }
+    else { :cout << "Failed." << endl; }
 
-    std::cout << "Applying a scale of 0.5..." << std::endl;
+   cout << "Applying a scale of 0.5..." << endl;
     initialCoords = m_A;
     scale(0.5);
     bool scalePassed = true;
     for (int j = 0; j < initialCoords.getCols(); j++) {
         if (!almostEqual(m_A(0, j), 0.5 * initialCoords(0,j)) || !almostEqual(m_A(1, j), 0.5 * initialCoords(1, j))) {
-            std::cout << "Failed mapping: ";
-            std::cout << "(" << initialCoords(0, j) << ", " << initialCoords(1, j) << ")"
+           cout << "Failed mapping: ";
+          cout << "(" << initialCoords(0, j) << ", " << initialCoords(1, j) << ")"
                       << " ==> (" << m_A(0, j) << ", " << m_A(1, j) << ")" << std::endl;
             scalePassed = false;
         }
     }
-    if (scalePassed) { std::cout << "Passed.\n\n+1" << std::endl; score++; }
-    else { std::cout << "Failed." << std::endl; }
+    if (scalePassed) { cout << "Passed.\n\n+1" << endl; score++; }
+    else { cout << "Failed." <endl; }
 
-    std::cout << "Applying a translation of (10, 5)..." << std::endl;
-    initialCoords = m_A;
+    cout << "Applying a translation of (10, 5)..." << endl;
+    initialCoords = A;
     translate(10, 5);
     bool translatePassed = true;
     for (int j = 0; j < initialCoords.getCols(); j++) {
         if (!almostEqual(m_A(0, j), 10 + initialCoords(0, j)) || !almostEqual(m_A(1, j), 5 + initialCoords(1, j))) {
-            std::cout << "Failed mapping: ";
-            std::cout << "(" << initialCoords(0, j) << ", " << initialCoords(1, j) << ")"
+          cout << "Failed mapping: ";
+           cout << "(" << initialCoords(0, j) << ", " << initialCoords(1, j) << ")"
                       << " ==> (" << m_A(0, j) << ", " << m_A(1, j) << ")" << std::endl;
             translatePassed = false;
         }
     }
-    if (translatePassed) { std::cout << "Passed.\n\n+1" << std::endl; score++; }
-    else { std::cout << "Failed." << std::endl; }
+    if (translatePassed) { scout << "Passed.\n\n+1" << endl; score++; }
+    else { cout << "Failed." << endl; }
 
-    std::cout << "Score: " << score << " / 7" << std::endl;
+   cout << "Score: " << score << " / 7" << endl;
 }
 

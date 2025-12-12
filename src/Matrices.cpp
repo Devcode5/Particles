@@ -6,7 +6,7 @@
 
 using namespace Matrices;
 
-// Matrix ctor
+
 Matrix::Matrix(int _rows, int _cols) : rows(_rows), cols(_cols) {
     a.assign(rows, std::vector<double>(cols, 0.0));
 }
@@ -38,7 +38,7 @@ Matrix Matrices::operator*(const Matrix& A, const Matrix& B) {
     return C;
 }
 
-// equality with tolerance
+
 bool Matrices::operator==(const Matrix& A, const Matrix& B) {
     if (A.getRows() != B.getRows() || A.getCols() != B.getCols()) return false;
     const double eps = 1e-6;
