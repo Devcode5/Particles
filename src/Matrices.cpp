@@ -5,16 +5,16 @@
 #include <cmath>
 
 using namespace Matrices;
-
+using namespace std;
 
 Matrix::Matrix(int _rows, int _cols) : rows(_rows), cols(_cols) {
-    a.assign(rows, std::vector<double>(cols, 0.0));
+    a.assign(rows, vector<double>(cols, 0.0));
 }
 
 // operator+ (elementwise)
 Matrix Matrices::operator+(const Matrix& A, const Matrix& B) {
     if (A.getRows() != B.getRows() || A.getCols() != B.getCols())
-        throw std::runtime_error("Matrix dimensions must match for +");
+        throw runtime_error("Matrix dimensions must match for +");
     Matrix C(A.getRows(), A.getCols());
     for (int i = 0; i < A.getRows(); ++i)
         for (int j = 0; j < A.getCols(); ++j)
@@ -25,7 +25,7 @@ Matrix Matrices::operator+(const Matrix& A, const Matrix& B) {
 // operator* (matrix multiply)
 Matrix Matrices::operator*(const Matrix& A, const Matrix& B) {
     if (A.getCols() != B.getRows())
-        throw std::runtime_error("Matrix multiply dimension mismatch");
+        throw runtime_error("Matrix multiply dimension mismatch");
     Matrix C(A.getRows(), B.getCols());
     for (int i = 0; i < A.getRows(); ++i) {
         for (int j = 0; j < B.getCols(); ++j) {
@@ -49,7 +49,7 @@ bool Matrices::operator==(const Matrix& A, const Matrix& B) {
 }
 bool Matrices::operator!=(const Matrix& A, const Matrix& B) { return !(A==B); }
 
-std::ostream& Matrices::operator<<(std::ostream& os, const Matrix& A) {
+ostream& Matrices::operator<<(ostream& os, const Matrix& A) {
     for (int i=0;i<A.getRows();++i) {
         for (int j=0;j<A.getCols();++j) {
             os << A(i,j);

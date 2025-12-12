@@ -10,13 +10,13 @@ using namespace std;
 
 Engine::Engine() {
     srand((unsigned)time(nullptr));
-    // create window (1280x720)
+    // This line will create window (1280x720)
     m_Window.create(VideoMode(1280, 720), "Particles");
 }
 
 void Engine::run() {
     cout << "Starting Particle unit tests..." << endl;
-    // unit tests particle in center
+    // This part is about unit tests particle in center
     Particle p(m_Window, 4, { (int)m_Window.getSize().x / 2, (int)m_Window.getSize().y / 2 });
     p.unitTests();
     cout << "Unit tests complete.  Starting engine..." << endl;
@@ -36,7 +36,6 @@ void Engine::input() {
         if (event.type == sf::Event::Closed) m_Window.close();
         if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) m_Window.close();
         if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
-            // spawn several particles
             Vector2i pos = sf::Mouse::getPosition(m_Window);
             for (int i = 0; i < 5; ++i) {
                 int numPoints = 25 + (rand() % 26); // 25..50
